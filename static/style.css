@@ -126,18 +126,24 @@ body {
     background: #E0E0E0;
 }
 
-/* Allinea i messaggi del visitatore (guest) a destra */
-.messages__item--visitor {
-    margin-left: auto; /* Allinea a destra */
-    background: #E0E0E0; /* Colore di sfondo per il visitatore */
-}
-
-/* Allinea i messaggi dell'operatore a sinistra */
+/* Allinea i messaggi dell'operatore a sinistra con coda a sinistra */
 .messages__item--operator {
     margin-right: auto; /* Allinea a sinistra */
     background: var(--primary); /* Colore di sfondo per l'operatore */
     color: white;
+    position: relative; /* Necessario per posizionare la coda */
+    border-radius: 20px 20px 20px 5px; /* Arrotonda gli angoli */
 }
+
+
+/* Allinea i messaggi del visitatore (guest) a destra con coda a destra */
+.messages__item--visitor {
+    margin-left: auto; /* Allinea a destra */
+    background: #E0E0E0; /* Colore di sfondo per il visitatore */
+    position: relative; /* Necessario per posizionare la coda */
+    border-radius: 20px 20px 5px 20px; /* Arrotonda gli angoli */
+}
+
 
 /* Se vuoi aggiungere uno spazio tra i messaggi e il bordo */
 .chatbox__messages {
