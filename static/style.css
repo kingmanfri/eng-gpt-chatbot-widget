@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Blinker', sans-serif;
     font-weight: 400;
     font-size: 100%;
     background: #F1F1F1;
@@ -17,6 +19,10 @@ body {
     --primaryBoxShadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     --secondaryBoxShadow: 0px -10px 15px rgba(0, 0, 0, 0.1);
     --primary: #581B98;
+    --primary-dark-blue: #2D58A7;
+    --secondary-dark-blue: #1D3C78;
+    --secondary-light-blue: #DDE6F6;
+    --type-white: #FFFFFF;
 }
 
 /* CHATBOX
@@ -29,9 +35,9 @@ body {
 
 /* CONTENT IS CLOSE */
 .chatbox__support {
-    display: flex;
-    flex-direction: column;
-    background: #eee;
+    position: fixed;
+    bottom: 90px;  /* Spostato più in alto per evitare il pulsante */
+    right: 20px;   /* Allineato con il pulsante */
     width: 80vw;
     max-width: 400px;
     height: 70vh;
@@ -39,7 +45,10 @@ body {
     z-index: -123456;
     opacity: 0;
     transition: all .5s ease-in-out;
-    border-radius: 20px; /* Uniforme per tutti gli angoli */
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    background: var(--secondary-light-blue);
 }
 
 /* CONTENT IS OPEN */
@@ -51,34 +60,56 @@ body {
 
 /* BUTTON */
 .chatbox__button {
-    text-align: right;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999; /* Assicura che il pulsante stia sopra alla finestra se necessario */
 }
 
-.send__button {
-    padding: 6px;
-    background: transparent;
+.chatbox__button button {
+    width: 60px;
+    height: 60px;
+    background: var(--secondary-dark-blue);
     border: none;
-    outline: none;
+    border-radius: 50%;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.chatbox__button button:hover {
+    transform: scale(1.05);
+}
+
+.chatbox__button img {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1); /* Assicura che l'icona sia bianca */
 }
 
 /* Header */
 .chatbox__header {
     position: sticky;
     top: 0;
-    background: var(--primaryGradient);
+    background: var(--primary-dark-blue);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: 15px 20px;
-    border-radius: 20px 20px 0 0;
+    border-radius: 9px 9px 0 0; /* Ridotto da 20px a 9px come richiesto */
     box-shadow: var(--primaryBoxShadow);
+    position: relative;
 }
 
 /* Stile per l'immagine nell'intestazione */
 .chatbox__image--header {
-    margin-right: 10px;
+    margin-right: 15px;    /* Aumentato da 10px a 15px per allontanarlo dal testo */
+    margin-left: -5px;     /* Margin negativo per spostarlo più a sinistra */
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -86,28 +117,63 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
-    box-shadow: var(--primaryBoxShadow);
+    background-color: var(--primary-dark-blue);
+    box-shadow: none;
 }
 
 .chatbox__image--header img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 70%;       /* Ridotto da 100% a 70% */
+    height: 70%;      /* Ridotto da 100% a 70% */
+    object-fit: contain;  /* Cambiato da cover a contain per preservare le proporzioni */
+    padding: 0;       /* Assicuriamo che non ci sia padding */
 }
 
 /* Titolo dell'intestazione in bianco */
 .chatbox__heading--header {
-    font-size: 1.2rem;
+    font-size: 1.4rem;  /* Aumentato da 1.2rem a 1.4rem */
     color: #fff;
+    font-family: 'Blinker', sans-serif;
+    font-weight: 600;
 }
 
 /* Descrizione dell'intestazione in bianco */
 .chatbox__description--header {
-    font-size: .9rem;
+    font-size: 1rem;    /* Aumentato da 0.9rem a 1rem */
     color: #fff;
+    font-family: 'Blinker', sans-serif;
+    font-weight: 300;
 }
 
+/* Stile aggiornato per il pulsante di chiusura */
+.chatbox__close--button {
+    position: absolute;
+    top: -15px;           /* Spostato più in alto rispetto al precedente valore di 10px */
+    right: -15px;         /* Spostato più a destra rispetto al precedente valore di 10px */
+    z-index: 10;
+}
+
+.close-btn {
+    background: var(--secondary-dark-blue) 0% 0% no-repeat;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn:hover {
+    background: var(--secondary-dark-blue);
+    opacity: 0.9;
+    transform: scale(1.1);
+}
 
 /* Messages */
 .chatbox__messages {
@@ -120,36 +186,37 @@ body {
 
 .messages__item {
     margin-top: 10px;
-    padding: 8px 12px;
+    padding: 10px 14px; /* Padding leggermente aumentato */
     max-width: 85%;
-    border-radius: 20px; /* Uniforme per tutti gli angoli */
+    border-radius: 20px;
     background: #E0E0E0;
+    font-family: 'Blinker', sans-serif;
+    font-size: 1.05rem;  /* Aumentato da 0.95rem a 1.05rem */
 }
 
 /* Allinea i messaggi dell'operatore a sinistra con coda a sinistra */
 .messages__item--operator {
-    margin-right: auto; /* Allinea a sinistra */
-    background: var(--primary); /* Colore di sfondo per l'operatore */
-    color: white;
-    position: relative; /* Necessario per posizionare la coda */
-    border-radius: 20px 20px 20px 5px; /* Arrotonda gli angoli */
+    margin-right: auto;
+    background: var(--type-white);
+    color: #333;
+    position: relative;
+    border-radius: 20px 20px 20px 5px;
+    border: 1px solid #ccc;
 }
-
 
 /* Allinea i messaggi del visitatore (guest) a destra con coda a destra */
 .messages__item--visitor {
     margin-left: auto; /* Allinea a destra */
-    background: #E0E0E0; /* Colore di sfondo per il visitatore */
+    background: #EDF2FA; /* Cambiato da #E0E0E0 al colore blu chiaro richiesto */
     position: relative; /* Necessario per posizionare la coda */
     border-radius: 20px 20px 5px 20px; /* Arrotonda gli angoli */
+    border: 1px solid #ccc; /* Bordo grigio */
 }
-
 
 /* Se vuoi aggiungere uno spazio tra i messaggi e il bordo */
 .chatbox__messages {
     padding: 20px;
 }
-
 
 /* FOOTER */
 .chatbox__footer {
@@ -157,34 +224,36 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px;
-    background: var(--secondaryGradient);
-    box-shadow: var(--secondaryBoxShadow);
-    border-radius: 0 0 20px 20px; /* Angoli inferiori arrotondati */
+    padding: 10px;
+    background: var(--secondary-light-blue);
+    box-shadow: none;
+    border-radius: 0 0 9px 9px;
 }
 
 .chatbox__footer input {
-    width: 80%;
+    width: 100%;
     border: none;
-    padding: 10px 10px;
-    border-radius: 30px;
+    padding: 14px 15px;
+    border-radius: 9px 0 0 9px;
     text-align: left;
+    font-size: 1.05rem;
+    background: #FFFFFF;
+    height: 48px;
 }
 
 .chatbox__send--footer {
+    background: var(--primary-dark-blue);
     color: white;
-}
-
-.chatbox__button button,
-.chatbox__button button:focus,
-.chatbox__button button:visited {
-    padding: 10px;
-    background: white;
+    font-size: 1.05rem;
     border: none;
-    outline: none;
-    border-radius: 20px; /* Uniforme per tutti gli angoli del pulsante */
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+    height: 48px;
+    padding: 0 20px;
+    margin-left: -1px; /* Per evitare gap tra input e pulsante */
+    border-radius: 0 9px 9px 0;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Question Container */
@@ -234,4 +303,9 @@ body {
     .question-container {
         width: 90%;
     }
+}
+
+/* Per garantire che il font sia applicato ovunque */
+.chatbox, .chatbox * {
+    font-family: 'Blinker', sans-serif;
 }
